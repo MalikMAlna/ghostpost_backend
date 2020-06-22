@@ -11,11 +11,11 @@ class PostViewSet(ModelViewSet):
     basename = 'post'
     queryset = Post.objects.all()
 
-    # @action(detail=False)
-    # def highest_rated(self, request):
-    #     highest_rated = Post.objects.all().order_by('total_vote')
-    #     serializer = self.get_serializer(highest_rated, many=True)
-    #     return Response(serializer.data)
+    @action(detail=False)
+    def highest_rated(self, request):
+        highest_rated = Post.objects.all().order_by('down_vote', '-up_vote')
+        serializer = self.get_serializer(highest_rated, many=True)
+        return Response(serializer.data)
 
     @action(detail=False)
     def boast(self, request):
