@@ -74,6 +74,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ghostpost_api.wsgi.application'
 
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
