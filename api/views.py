@@ -1,3 +1,4 @@
+from rest_framework import status
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -28,3 +29,17 @@ class PostViewSet(ModelViewSet):
         roast = Post.objects.filter(b_or_r=False)
         serializer = self.get_serializer(roast, many=True)
         return Response(serializer.data)
+
+    @action(detail=True, methods=['post'])
+    def upvote(self, request, pk=None):
+        post = self.get_object()
+        post.up_vote += 1
+        post.save()
+        return Response({'status': '+1 upvote'})
+
+    @action(detail=True, methods=['post'])
+    def downvote(self, request, pk=None):
+        post = self.get_object()
+        post.down_vote += 1
+        post.save()
+        return Response({'status': '+1 downvote'})
